@@ -1,6 +1,3 @@
 [submodule "abcdenzel.xyz.hugo/themes/nightfall"]
 	path = abcdenzel.xyz.hugo/themes/nightfall
 	url = https://github.com/lordmathis/hugo-theme-nightfall.git
-[submodule "diary"]
-	path = abcdenzel.xyz.hugo/themes/diary
-	url = https://github.com/AmazingRise/hugo-theme-diary.git
