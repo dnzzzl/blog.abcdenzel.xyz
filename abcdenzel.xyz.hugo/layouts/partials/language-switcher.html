@@ -1,0 +1,58 @@
+<div class="language-switcher">
+  {{/* Check if we're on a 404 page first */}}
+  {{ if eq .Kind "404" }}
+    {{/* On 404 page, always link to /posts of other language */}}
+    {{ range $.Site.Languages }}
+      {{ if ne $.Language.Lang .Lang }}
+        {{ $postsURL := "/posts/" }}
+        {{ if ne .Lang "en" }}
+          {{ $postsURL = printf "/%s/posts/" .Lang }}
+        {{ end }}
+        <a href="{{ $postsURL }}" lang="{{ .Lang }}" class="lang-link" title="{{ .LanguageName }}">
+          {{ .LanguageName }}
+        </a>
+      {{ end }}
+    {{ end }}
+  {{ else if .IsTranslated }}
+    {{/* Link to translated version of current page */}}
+    {{ range .Translations }}
+      <a href="{{ .Permalink }}" lang="{{ .Language.Lang }}" class="lang-link" title="{{ .Language.LanguageName }}">
+        {{ .Language.LanguageName }}
+      </a>
+    {{ end }}
+  {{ else }}
+    {{/* No translation exists, link to /posts of other language */}}
+    {{ range $.Site.Languages }}
+      {{ if ne $.Language.Lang .Lang }}
+        {{ $postsURL := "/posts/" }}
+        {{ if ne .Lang "en" }}
+          {{ $postsURL = printf "/%s/posts/" .Lang }}
+        {{ end }}
+        <a href="{{ $postsURL }}" lang="{{ .Lang }}" class="lang-link" title="{{ .LanguageName }}">
+          {{ .LanguageName }}
+        </a>
+      {{ end }}
+    {{ end }}
+  {{ end }}
+</div>
+
+<style>
+.language-switcher {
+  display: inline-block;
+  margin-left: 1rem;
+}
+
+.language-switcher .lang-link {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--border-color, #444);
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.language-switcher .lang-link:hover {
+  background-color: var(--hover-bg, rgba(255, 255, 255, 0.1));
+  border-color: var(--hover-border, #666);
+}
+</style>

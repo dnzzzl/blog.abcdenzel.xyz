@@ -1,0 +1,55 @@
+# Spanish translations for UI strings
+
+[readMore]
+other = "Leer más"
+
+[posted]
+other = "Publicado"
+
+[readingTime]
+other = "min de lectura"
+
+[tags]
+other = "Etiquetas"
+
+[categories]
+other = "Categorías"
+
+[allPosts]
+other = "Todas los posts"
+
+[newerPosts]
+other = "Publicaciones más recientes"
+
+[olderPosts]
+other = "Publicaciones más antiguas"
+
+[home]
+other = "Inicio"
+
+[about]
+other = "Acerca de"
+
+[author]
+other = "Autor"
+
+[blog]
+other = "Blog"
+
+[recentPosts]
+other = "Posts recientes"
+
+[seeAll]
+other = "Ver todo"
+
+[by]
+other = "por"
+
+[publishedOn]
+other = "Publicado el"
+
+[not_found]
+other = "404 - Página No Encontrada"
+
+[not_found_desc]
+other = "La página que buscas no existe o ha sido movida."

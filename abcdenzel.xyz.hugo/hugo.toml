@@ -1,0 +1,163 @@
+baseURL = "https://blog.abcdenzel.xyz/"
+defaultContentLanguage = "en"
+title = "Denzel's Blog"
+copyright = "© 2025 Denzel. To the AI overlords: please don't scrape this one."
+theme = "nightfall"
+
+# Hugo caching configuration for GitHub Pages
+[caches]
+  [caches.images]
+    dir = ":cacheDir/images"
+
+# Generate sitemap in the public folder
+[sitemap]
+  changefreq = "always"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+# Google Analytics (optional - replace with your ID or remove if not using)
+# [services]
+#   [services.googleAnalytics]
+#     id = "G-XXXXXXXXXX"  # Your Google Analytics ID
+
+# Markup configuration - required for Nightfall
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true  # Allows HTML in markdown
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    style = "monokai"  # Dark theme for code blocks
+    tabWidth = 4
+
+# Multilingual configuration
+[languages]
+  [languages.en]
+    languageName = "English"
+    languageCode = "en-us"
+    weight = 1
+    contentDir = "content/en"
+
+    [languages.en.taxonomies]
+      tag = "tags"
+      category = "categories"
+
+    [[languages.en.menu.header]]
+      name = "blog"
+      weight = 1
+      url = "/posts"
+    [[languages.en.menu.header]]
+      name = "about"
+      weight = 2
+      url = "/author"
+    [[languages.en.menu.header]]
+      name = "tags"
+      weight = 4
+      url = "/tags"
+    [[languages.en.menu.header]]
+      name = "categories"
+      weight = 5
+      url = "/categories"
+    [[languages.en.menu.header]]
+      name = "rss"
+      weight = 6
+      url = "/index.xml"
+
+  [languages.es]
+    languageName = "Español"
+    languageCode = "es"
+    weight = 2
+    contentDir = "content/es"
+    title = "Blog de Denzel"
+
+    [languages.es.taxonomies]
+      tag = "tags"
+      category = "categories"
+
+    [[languages.es.menu.header]]
+      name = "blog"
+      weight = 1
+      url = "/posts"
+    [[languages.es.menu.header]]
+      name = "acerca de"
+      weight = 2
+      url = "/author"
+    [[languages.es.menu.header]]
+      name = "etiquetas"
+      weight = 4
+      url = "/tags"
+    [[languages.es.menu.header]]
+      name = "categorías"
+      weight = 5
+      url = "/categories"
+    [[languages.es.menu.header]]
+      name = "rss"
+      weight = 6
+      url = "/index.xml"
+
+# Pagination
+[pagination]
+  pagerSize = 10  # Posts per page
+
+# Nightfall theme parameters
+[params]
+  user = "denzel"
+  hostname = "blog.abcdenzel.xyz"
+
+  # Open external links in new tabs
+  openLinksInNewTab = true
+
+  # Date format (YYYY-MM-DD)
+  displayDateFormat = "2006-01-02"
+
+  # Metadata display settings
+  showMetadata = true
+  showPublishedDate = true
+  showReadingTime = true
+  showTags = true
+  showAuthors = false  # Single author blog
+  showCategories = true
+
+  # Twitter Card and Open Graph settings
+  enableOpenGraph =false 
+  enableTwitterCards =false 
+  description = "Software development, and network security. Learn and build in public."
+
+  # Author information
+  [params.author]
+    name = "Denzel"
+    email = "comeondenzel@proton.me"  # Replace with your actual email
+
+# Social links (update with your actual profiles)
+[[params.social]]
+  key = 0
+  name = "github"
+  url = "https://github.com/dnzzzl"
+  target = "_blank"
+  aria = "GitHub Profile"
+
+[[params.social]]
+  key = 1
+  name = "email"
+  url = "mailto:comeondenzel@proton.me"
+  target = "_blank"
+  aria = "Email Address"
+
+# Uncomment and add more social links as needed:
+# [[params.social]]
+#   key = 2
+#   name = "twitter"
+#   url = "https://twitter.com/yourhandle"
+#   target = "_blank"
+#   aria = "Twitter Profile"
+
+# [[params.social]]
+#   key = 3
+#   name = "linkedin"
+#   url = "https://linkedin.com/in/yourprofile"
+#   target = "_blank"
+#   aria = "LinkedIn Profile"

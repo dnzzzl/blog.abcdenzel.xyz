@@ -1,0 +1,58 @@
+<header class="headerWrapper">
+    <div class="header">
+        <div>
+            <a class="terminal" href="{{ .Site.BaseURL | relLangURL }}">
+                <span>{{ .Site.Params.user }}@{{ .Site.Params.hostname }} ~ $</span>
+            </a>
+        </div>
+        <input class="side-menu" type="checkbox" id="side-menu">
+        <label class="hamb" for="side-menu"><span class="hamb-line"></span></label>
+        <nav class="headerLinks">
+            <ul>
+                {{ range .Site.Menus.header }}
+                <li>
+                    <a href="{{ .URL | absLangURL }}" title="{{ .Title }}" >
+                        ~/{{- .Name -}}
+                    </a>
+                </li>
+                {{ end }}
+            </ul>
+        </nav>
+          {{/* Language switcher */}}
+          <li class="lang-switcher-item">
+              {{ partial "language-switcher.html" . }}
+          </li>
+    </div>
+</header>
+
+<style>
+.lang-switcher-item {
+    list-style: none;
+}
+
+.language-switcher {
+    display: inline-block;
+}
+
+.language-switcher .lang-link {
+    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--border-color, #444);
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    color: var(--text-color, #ccc);
+}
+
+.language-switcher .lang-link:hover {
+    background-color: var(--hover-bg, rgba(255, 255, 255, 0.1));
+    border-color: var(--hover-border, #666);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .lang-switcher-item {
+        margin-top: 0.5rem;
+    }
+}
+</style>

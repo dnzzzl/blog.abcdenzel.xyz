@@ -1,0 +1,55 @@
+# English translations for UI strings
+
+[readMore]
+other = "Read more"
+
+[posted]
+other = "Posted"
+
+[readingTime]
+other = "min read"
+
+[tags]
+other = "Tags"
+
+[categories]
+other = "Categories"
+
+[allPosts]
+other = "All posts"
+
+[newerPosts]
+other = "Newer posts"
+
+[olderPosts]
+other = "Older posts"
+
+[home]
+other = "Home"
+
+[about]
+other = "About"
+
+[author]
+other = "Author"
+
+[blog]
+other = "Blog"
+
+[recentPosts]
+other = "Recent posts"
+
+[seeAll]
+other = "See all"
+
+[by]
+other = "by"
+
+[publishedOn]
+other = "Published on"
+
+[not_found]
+other = "404 - Page Not Found"
+
+[not_found_desc]
+other = "The page you're looking for doesn't exist or has been moved."
