@@ -1,6 +1,6 @@
 +++
 date = '2025-11-16T14:00:00-04:00'
-draft = false 
+draft = true 
 title = 'Infrastructure as Code: From Zero to Deployed'
 tags = ['terraform', 'ansible', 'iac', 'devops', 'automation']
 categories = ['tech']
