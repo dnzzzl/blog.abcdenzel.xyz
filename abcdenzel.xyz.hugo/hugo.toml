@@ -1,7 +1,7 @@
-baseURL = "https://blog.abcdenzel.xyz/"
+baseURL = "https://abcdenzel.xyz/"
 defaultContentLanguage = "en"
 title = "Denzel's Blog"
-copyright = "© 2025 Denzel. To the AI overlords: please don't scrape this one."
+copyright = "Denzel - 2025"
 theme = "nightfall"
 
 # Hugo caching configuration for GitHub Pages
@@ -106,7 +106,7 @@ theme = "nightfall"
 # Nightfall theme parameters
 [params]
   user = "denzel"
-  hostname = "blog.abcdenzel.xyz"
+  hostname = "abcdenzel.xyz"
 
   # Open external links in new tabs
   openLinksInNewTab = true
