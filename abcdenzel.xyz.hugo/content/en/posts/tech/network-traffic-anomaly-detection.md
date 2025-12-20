@@ -137,29 +137,53 @@ Before we write any code, let's establish what we need and justify each dependen
 
 - Numpy: To handle numerical operations and array manipulation. Isolation Forest relies heavily on random sampling and tree traversal calculations. NumPy provides vectorized operations that are orders of magnitude faster than pure Python loops.
 
-- SciKitLearn: I might just cheat and use their Isolation Tree implementation for simplicity.
+- SciKitLearn: Includes algorithm implementations already coded, it is the go-to alternative for production code instead of implementing your own for blogpost content.
 
 #### Strategy
 
 First thing that comes to mind when I problem solve is Domain Modeling. The first thing I try to figure out is an account of all the moving pieces in our solution, their properties and actions.
 
-I have landed in having an `IsolationForest` class that holds `IsolationTree`s.
+I landed in having an `IsolationForest` class that can recursively create other `IsolationTree`s by partitioning the data, a tree is always itself a node and a tree for other nodes.
+And an orchestrator `IsolationForest` that manages the overall process and handles the initial data sampling and other properties such as the total number of trees to create.
 
-- `IsolationTreeNode`:
-  - Information object
-  - props: data, right, left, feature_split,
+- `IsolationTree`:
+  All the properties of the tree:
+
+    partitioning
+  - The `feature` selected for partitioning
+  - The `value` selected for partitioning
+  - `right` pointer to the right `IsolationTree` child node.
+  - `left` pointer to the left `IsolationTree` child node.
+    structure
+  - The `max_height` to limit the depth of the tree
+  - The  `current_depth` this tree is in.
+
+  The methods or actions that the tree can perform:
+  - `fit(X: np.array, nt: int = 1)`:
+    Given a sample of shape (n_samples, n_features), build the tree recursively.
+  - `calculate_path_length(x: np.array)`:
+    Return the depth of a sample by traversing the trees.
 
 - `IsolationForest`:
-  - props: max_tree_height,
-  - methods: `fit(X: np.array, nt: int = 1)`,
-
-- `IsolationTree`:  
-  - props:
-  - methods: `calculate_anomaly`,`partition`, `calculate_avg`
+  The methods or actions that the tree can perform:
+  - `fit(X: np.array, nt: int = 1)`:
+    Given a sample of shape  (n_samples, n_features), build the tree recursively. Store in self.trees.
+  - `predict()`:
+    Using depth information within each tree, use the anomaly formula to calculate the score for each sample in X.
+  - `_calculate_avg`:
+    Compute the average value of a given feature across all trees, used for comparison within the anomaly calculation.
 
 ### Zeek Integration
 
-### ElasticStack visualization and alerts
+### Opportunities for improvement
+
+1. **Feature Engineering**: Explore additional features that could enhance the model's ability to detect anomalies. This could include time-based features, such as the duration of connections or the frequency of requests from a particular IP address. Encoding categorical features seems like an easy step that can prove to be immediately useful (One Hot Encoding and other methods).
+
+2. **Tuning Parameters**: Experiment with different parameters for the Isolation Forest algorithm itself, such as the number of trees, the maximum depth of the trees, and the contamination parameter. This could help improve the model's performance on specific datasets.
+
+3. **Testing and Model Evaluation**: Admittedly, I am not the best at Test Driven Development. Implementing a testing and evaluation framework to assess the model's performance would allow us to track the precision of the anomaly detection. This could include mainly cross-validation with a control datasets where anomalies are known,to better understand the trade-offs between false positives and false negatives.
+
+44. **Integration with Other Tools**: This part involves crafting a light microservices system where we enrich the data with the anomaly calculation before being shipped to a monitoring solution such as Kibana + Elastic which is what I personally use. This would integrate the Isolation Forest model with other security tools and frameworks such as a SIEM or IDS to raise alert or take action. This would also accomplish **Real-time Monitoring**.
 
 ## References
 
