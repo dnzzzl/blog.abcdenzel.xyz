@@ -1,3 +1,6 @@
 [submodule "abcdenzel.xyz.hugo/themes/nightfall"]
 	path = abcdenzel.xyz.hugo/themes/nightfall
 	url = git@github.com:dnzzzl/hugo-theme-nightfall.git
+[submodule "abcdenzel.xyz.hugo/themes/PaperMod"]
+	path = abcdenzel.xyz.hugo/themes/PaperMod
+	url = https://github.com/adityatelange/hugo-PaperMod.git

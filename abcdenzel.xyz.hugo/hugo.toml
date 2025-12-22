@@ -1,8 +1,96 @@
 baseURL = "https://abcdenzel.xyz/"
-defaultContentLanguage = "en"
 title = "Denzel's Blog"
 copyright = "Denzel - 2025"
-theme = "nightfall"
+theme = "PaperMod"
+
+# Multilingual configuration
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+
+[languages]
+  [languages.en]
+    languageCode = "en-US"
+    languageName = "English"
+    weight = 1
+    contentDir = "content/en"
+    [languages.en.params]
+      description = "Software development, and network security. Learn and build in public."
+      author = "Denzel"
+      [languages.en.params.homeInfoParams]
+        Title = "Denzel's Blog"
+        Content = "Software development, network security. Learning and building in public. <a href='/about'>Who is Denzel?</a>"
+    [[languages.en.menu.main]]
+      identifier = "posts"
+      name = "Blog"
+      url = "/posts/"
+      weight = 1
+    [[languages.en.menu.main]]
+      identifier = "categories"
+      name = "Categories"
+      url = "/categories/"
+      weight = 2
+    [[languages.en.menu.main]]
+      identifier = "tags"
+      name = "Tags"
+      url = "/tags/"
+      weight = 3
+    [[languages.en.menu.main]]
+      identifier = "about"
+      name = "About"
+      url = "/about/"
+      weight = 4
+    [[languages.en.menu.main]]
+      identifier = "cv"
+      name = "CV"
+      url = "/DenzelMendez-Systems_Engineer_Resume.pdf"
+      weight = 5
+    [[languages.en.menu.main]]
+      identifier = "search"
+      name = "Search"
+      url = "/search/"
+      weight = 6
+
+  [languages.es]
+    languageCode = "es"
+    languageName = "Español"
+    weight = 2
+    contentDir = "content/es"
+    [languages.es.params]
+      description = "Desarrollo de software y seguridad de redes. Aprende y construye en público."
+      author = "Denzel"
+      [languages.es.params.homeInfoParams]
+        Title = "Blog de Denzel"
+        Content = "Desarrollo de software, seguridad de redes. Aprendiendo y construyendo en público. <a href='/es/about'>¿Quién es Denzel?</a>"
+    [[languages.es.menu.main]]
+      identifier = "posts"
+      name = "Blog"
+      url = "/es/posts/"
+      weight = 1
+    [[languages.es.menu.main]]
+      identifier = "categories"
+      name = "Categorías"
+      url = "/es/categories/"
+      weight = 2
+    [[languages.es.menu.main]]
+      identifier = "tags"
+      name = "Etiquetas"
+      url = "/es/tags/"
+      weight = 3
+    [[languages.es.menu.main]]
+      identifier = "about"
+      name = "Acerca de"
+      url = "/es/about/"
+      weight = 4
+    [[languages.es.menu.main]]
+      identifier = "cv"
+      name = "CV"
+      url = "/DenzelMendez-Systems_Engineer_Resume.pdf"
+      weight = 5
+    [[languages.es.menu.main]]
+      identifier = "search"
+      name = "Buscar"
+      url = "/es/search/"
+      weight = 6
 
 # Hugo caching configuration for GitHub Pages
 [caches]
@@ -15,157 +103,79 @@ theme = "nightfall"
   filename = "sitemap.xml"
   priority = 0.5
 
-# Google Analytics (optional - replace with your ID or remove if not using)
-# [services]
-#   [services.googleAnalytics]
-#     id = "G-XXXXXXXXXX"  # Your Google Analytics ID
-
-# Markup configuration - required for Nightfall
+# Markup configuration
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
-      unsafe = true  # Allows HTML in markdown
+      unsafe = true
   [markup.highlight]
     codeFences = true
     guessSyntax = false
     lineNos = false
     lineNumbersInTable = true
-    noClasses = true
-    style = "monokai"  # Dark theme for code blocks
+    noClasses = false
+    style = "dracula"
     tabWidth = 4
 
-# Multilingual configuration
-[languages]
-  [languages.en]
-    languageName = "English"
-    languageCode = "en-us"
-    weight = 1
-    contentDir = "content/en"
+# Taxonomies
+[taxonomies]
+  tag = "tags"
+  category = "categories"
 
-    [languages.en.taxonomies]
-      tag = "tags"
-      category = "categories"
-
-    [[languages.en.menu.header]]
-      name = "blog"
-      weight = 1
-      url = "/posts"
-    [[languages.en.menu.header]]
-      name = "about"
-      weight = 2
-      url = "/author"
-    [[languages.en.menu.header]]
-      name = "tags"
-      weight = 4
-      url = "/tags"
-    [[languages.en.menu.header]]
-      name = "categories"
-      weight = 5
-      url = "/categories"
-    [[languages.en.menu.header]]
-      name = "rss"
-      weight = 6
-      url = "/index.xml"
-    [[languages.en.menu.header]]
-      name = "CV"
-      weight = 7
-      url = "/DenzelMendez-Systems_Engineer_Resume.pdf"
-
-  [languages.es]
-    languageName = "Español"
-    languageCode = "es"
-    weight = 2
-    contentDir = "content/es"
-    title = "Blog de Denzel"
-
-    [languages.es.taxonomies]
-      tag = "tags"
-      category = "categories"
-
-    [[languages.es.menu.header]]
-      name = "blog"
-      weight = 1
-      url = "/posts"
-    [[languages.es.menu.header]]
-      name = "acerca de"
-      weight = 2
-      url = "/author"
-    [[languages.es.menu.header]]
-      name = "etiquetas"
-      weight = 4
-      url = "/tags"
-    [[languages.es.menu.header]]
-      name = "categorías"
-      weight = 5
-      url = "/categories"
-    [[languages.es.menu.header]]
-      name = "rss"
-      weight = 6
-      url = "/index.xml"
-    [[languages.es.menu.header]]
-      name = "CV"
-      weight = 7
-      url = "/DenzelMendez-Desarrollador_Curriculum.pdf"
 
 # Pagination
 [pagination]
-  pagerSize = 10  # Posts per page
+  pagerSize = 10
 
-# Nightfall theme parameters
+# Output formats for search
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+# PaperMod theme parameters (shared across languages)
 [params]
-  user = "denzel"
-  hostname = "abcdenzel.xyz"
+  env = "production"
 
-  # Open external links in new tabs
-  openLinksInNewTab = true
+  # Dark/Light mode: auto, light, dark
+  defaultTheme = "auto"
+  disableThemeToggle = false
 
-  # Date format (YYYY-MM-DD)
-  displayDateFormat = "2006-01-02"
+  # Show reading time
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowWordCount = false
+  ShowRssButtonInSectionTermList = true
+  UseHugoToc = true
+  disableSpecial1stPost = false
+  disableScrollToTop = false
+  hidemeta = false
+  hideSummary = false
+  showtoc = true
+  tocopen = false
 
-  # Metadata display settings
-  showMetadata = true
-  showPublishedDate = true
-  showReadingTime = true
-  showTags = true
-  showAuthors = false  # Single author blog
-  showCategories = true
+  # Social icons on home (shared)
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/dnzzzl"
+  [[params.socialIcons]]
+    name = "email"
+    url = "mailto:comeondenzel@proton.me"
+  [[params.socialIcons]]
+    name = "rss"
+    url = "/index.xml"
 
-  # Twitter Card and Open Graph settings
-  enableOpenGraph =false 
-  enableTwitterCards =false 
-  description = "Software development, and network security. Learn and build in public."
+  # Search
+  [params.fuseOpts]
+    isCaseSensitive = false
+    shouldSort = true
+    location = 0
+    distance = 1000
+    threshold = 0.4
+    minMatchCharLength = 0
+    keys = ["title", "permalink", "summary", "content"]
 
-  # Author information
-  [params.author]
-    name = "Denzel"
-    email = "comeondenzel@proton.me"  # Replace with your actual email
-
-# Social links (update with your actual profiles)
-[[params.social]]
-  key = 0
-  name = "github"
-  url = "https://github.com/dnzzzl"
-  target = "_blank"
-  aria = "GitHub Profile"
-
-[[params.social]]
-  key = 1
-  name = "email"
-  url = "mailto:comeondenzel@proton.me"
-  target = "_blank"
-  aria = "Email Address"
-
-# Uncomment and add more social links as needed:
-# [[params.social]]
-#   key = 2
-#   name = "twitter"
-#   url = "https://twitter.com/yourhandle"
-#   target = "_blank"
-#   aria = "Twitter Profile"
-
-# [[params.social]]
-#   key = 3
-#   name = "linkedin"
-#   url = "https://linkedin.com/in/yourprofile"
-#   target = "_blank"
-#   aria = "LinkedIn Profile"
+# Open external links in new tab
+[params.assets]
+  disableFingerprinting = false

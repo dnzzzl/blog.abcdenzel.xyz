@@ -1,12 +1,16 @@
-+++
-date = '2025-11-02T11:27:59-04:00'
-draft = false
-title = 'Author'
-+++
+---
+title: "About"
+layout: "single"
+url: "/about/"
+summary: "About Denzel"
+---
 
 ## I'm Denzel
 
 I build software, automate infrastructure, and occasionally spend way too much time figuring out why a system broke just so I understand how it works.
+
+I'm still an advocate for humans reading humans, as well as using the best tool for the job.
+My job with this blog is to connect with other tech people, so if any piece of content contains human reviewed AI generated content, it will be explicit.
 
 ## Background
 
@@ -14,7 +18,7 @@ I'm a software engineer working primarily with .NET, but I've ended up learning 
 
 My experience with has never been linear. I started with code, realized code needs somewhere to run, learned about servers and containers, then fell in love with security, attacking ctf systems then turning around to securing and monitor my own, which means understanding networking and security concerns, which brings you back to writing better code. It's all connected and my experience with software has brought me to a wholistic understanding of Systems Engineering.
 
-These days I spend most of my time on backend development, database architecture, and infrastructure automation. The .NET stuff pays the bills, but I'm equally likely to be wrestling with Ansible playbooks, debugging network traffic as I am writing application code. Or [writing my own network anomaly detection algorithm]() while studying for CySA+.
+These days I spend most of my time on backend development, database architecture, and infrastructure automation. .NET pays the bills, but I'm equally likely to be wrestling with Ansible playbooks, debugging network traffic as I am writing application code. Or [writing my own network anomaly detection algorithm]() while studying for CySA+.
 
 ## What I Know (And Don't)
 
