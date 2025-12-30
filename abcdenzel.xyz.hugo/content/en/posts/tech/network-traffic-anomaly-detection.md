@@ -26,6 +26,7 @@ And of course, before we have a forest, we need a tree:
 ### Binary trees
 
 {{< details summary="See the details" >}}
+
 Binary trees are [data structures]() that organize data in a traversable, hierarchical way.
 Trees are composed of levels, also called depth, at each level we find nodes that branch off into two other nodes a level below it, in a way that the top node is the root and it branches off into two other nodes below.
 
@@ -33,15 +34,26 @@ The relationship between these nodes is the logic behind the data structure, it 
 
 In the context of Isolation Forest, this becomes insightful: the path length itself tells us how many decisions were required to isolate a point.
 
-To traverse the binary tree an algorithm needs to evaluate the current node and the nodes below it, make a binary decision that gets it closer to its destination and, upon failure, be able to backtrack and choose a different path at a diverging point.
+To construct our binary trees we will split the data by choosing a random column or feature of the data, and a random value within the range of that column. This will give us a `_left` and `_right` side that we will go and recursively keep splitting, until we reach a preconfigured depth or a leaf node is reached.
 
-However, binary path traversal is not our problem to solve today, the way we will use binary trees is using random recursive partitioning to determine the anomalous points. This partinioning does what it says on the tin: The root node is the entire sample of the dataset, after a random feature is selected, the data is split between the min and max values, and this process is repeated recursively forming a tree structure. This happens until each branch has one node or a preconfigured max depth is reached.
 {{< /details >}}
 
-Now that we understand how binary trees create paths for isolating data points, let's see how Isolation Forests uses forests of these trees to detect anomalies: the theory.
+You know how binary trees create binary paths, let's see how Isolation Forests uses forests of these trees to isolate data points and detect anomalies, here is the theory:
 
 ### Isolation forest algorithm
 
+#### Executive summary
+
+In binary search, an algorithm needs to evaluate the current node and the nodes below it, make a binary decision that gets it closer to its destination and, upon failure, be able to backtrack and choose a different path at a diverging point.
+
+However, binary search is not our problem to solve today, instead, we will quantify the average path length across an ensamble of `n` amount of trees based on our data; and then its a simple matter of seeing which data points have shorter-than-average or extremely short paths.
+
+Of course, I could not have been that simple, there are nuances worth taking into account such as the problem of comparing path lengths across trees of different depths, the gist is, its not apples to apples.
+_This is covered below if you are as interested as I was, and in the original IForest paper._
+
+Having taken care of that, and applying the anomaly score formula you can then have a neat 0-1 score of how anomalous each connection your computer has made is.
+
+{{< details summary="Backstory of the algorithm" >}}
 The Isolation Forest approach to Anomaly Detection differs from previous methods that relied on profiling the normal activity via statistical analysis to then identify outliers, those methods produced higher rate of false positives, had non linear [time complexity]() limiting their application to smaller datasets and in simple terms they were just worse. See the references for sources.
 
 With the iForest apporach we rely on two characteristics: anomalies are few and different. which allows us to separate anomalous data points from others using less number of partitions.
@@ -62,9 +74,13 @@ Lets go back to our binary tree data representation and consider this visually:
 
 To reach node D, you must: go left at root, then go right at A. This path (left → right) encodes a unique "address" for that data region. Anomalies, being isolated, get short addresses. Normal points, being clustered, require longer addresses to distinguish them from neighbors.
 
+{{< /details >}}
+
+{{< details summary="Mathematical Intuition" >}}
+
 #### Euler's Constant, Harmonic Series and the Comparability Problem
 
-Feel free to skip this section, however, I spent a little too long to gathering a mathematical intuition good enough to implement our algorithm, here is the math laid out simply:
+This section is short and sweet, here is the math laid out simply:
 
 "_When you calculate path lengths in isolation trees, you have a comparability problem. If I build a tree with 100 samples and you build one with 10,000 samples, your paths will naturally be longer—not because your anomalies are less anomalous, but simply because there's more data to partition through_"
 
@@ -91,8 +107,9 @@ Where:
 Score close to 1 → anomaly
 Score close to 0.5 → normal
 Score close to 0 → very deep in normal cluster
+{{</details>}}
 
-## Conclusions
+### Conclusions
 
 Anomalies are few, so they don't cluster.
 Anomalies are different, so they lie in sparse regions.
