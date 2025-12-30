@@ -84,7 +84,7 @@ defaultContentLanguageInSubdir = false
     [[languages.es.menu.main]]
       identifier = "cv"
       name = "CV"
-      url = "/DenzelMendez-Systems_Engineer_Resume.pdf"
+      url = "denzelmendez-desarrollador_curriculum.pdf"
       weight = 5
     [[languages.es.menu.main]]
       identifier = "search"
@@ -162,7 +162,7 @@ defaultContentLanguageInSubdir = false
     url = "https://github.com/dnzzzl"
   [[params.socialIcons]]
     name = "email"
-    url = "mailto:comeondenzel@proton.me"
+    url = "mailto:denzel2603@gmail.com"
   [[params.socialIcons]]
     name = "rss"
     url = "/index.xml"
@@ -180,3 +180,6 @@ defaultContentLanguageInSubdir = false
 # Open external links in new tab
 [params.assets]
   disableFingerprinting = false
+
+[security]
+  enableInlineShortcodes = true
