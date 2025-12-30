@@ -25,6 +25,7 @@ And of course, before we have a forest, we need a tree:
 
 ### Binary trees
 
+{{< details summary="See the details" >}}
 Binary trees are [data structures]() that organize data in a traversable, hierarchical way.
 Trees are composed of levels, also called depth, at each level we find nodes that branch off into two other nodes a level below it, in a way that the top node is the root and it branches off into two other nodes below.
 
@@ -35,10 +36,9 @@ In the context of Isolation Forest, this becomes insightful: the path length its
 To traverse the binary tree an algorithm needs to evaluate the current node and the nodes below it, make a binary decision that gets it closer to its destination and, upon failure, be able to backtrack and choose a different path at a diverging point.
 
 However, binary path traversal is not our problem to solve today, the way we will use binary trees is using random recursive partitioning to determine the anomalous points. This partinioning does what it says on the tin: The root node is the entire sample of the dataset, after a random feature is selected, the data is split between the min and max values, and this process is repeated recursively forming a tree structure. This happens until each branch has one node or a preconfigured max depth is reached.
+{{< /details >}}
 
-## Learning
-
-Now that we understand how binary trees create isolation paths, let's see how Isolation Forest uses forests of these trees to detect anomalies in theory.
+Now that we understand how binary trees create paths for isolating data points, let's see how Isolation Forests uses forests of these trees to detect anomalies: the theory.
 
 ### Isolation forest algorithm
 
@@ -143,7 +143,7 @@ Before we write any code, let's establish what we need and justify each dependen
 
 First thing that comes to mind when I problem solve is Domain Modeling. The first thing I try to figure out is an account of all the moving pieces in our solution, their properties and actions.
 
-I landed in having an `IsolationForest` class that can recursively create other `IsolationTree`s by partitioning the data, a tree is always itself a node and a tree for other nodes.
+I landed in having an `IsolationForest` class that can recursively create other `IsolationTree`s by partitioning the data, the root node and any internal node is itself a tree for other nodes.
 And an orchestrator `IsolationForest` that manages the overall process and handles the initial data sampling and other properties such as the total number of trees to create.
 
 - `IsolationTree`:
@@ -175,7 +175,15 @@ And an orchestrator `IsolationForest` that manages the overall process and handl
 
 ### Zeek Integration
 
-### Opportunities for improvement
+#### Zeek Installation
+
+#### Automating alerts
+
+1 - elastic + kibana + elastic agent: Full SIEM solution with the ability to set up alerts, higher complexity
+
+2 - set up a script to run the model and send alerts on anomalies, low complexity, manual data exploration skills required to investigate events.
+
+## Opportunities for improvement
 
 1. **Feature Engineering**: Explore additional features that could enhance the model's ability to detect anomalies. This could include time-based features, such as the duration of connections or the frequency of requests from a particular IP address. Encoding categorical features seems like an easy step that can prove to be immediately useful (One Hot Encoding and other methods).
 
