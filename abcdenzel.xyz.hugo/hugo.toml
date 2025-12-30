@@ -180,3 +180,6 @@ defaultContentLanguageInSubdir = false
 # Open external links in new tab
 [params.assets]
   disableFingerprinting = false
+
+[security]
+  enableInlineShortcodes = true
