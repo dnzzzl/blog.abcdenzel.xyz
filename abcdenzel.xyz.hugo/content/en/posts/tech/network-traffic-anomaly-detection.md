@@ -1,6 +1,6 @@
 +++
 date = '2025-11-26T11:26:35-04:00'
-draft = true
+draft = false 
 title = 'Network Traffic Anomaly Detection'
 tags = ['AI', 'python', 'algorithms & data structures']
 categories = ['tech', 'writeup']
@@ -208,7 +208,7 @@ And an orchestrator `IsolationForest` that manages the overall process and handl
 
 3. **Testing and Model Evaluation**: Admittedly, I am not the best at Test Driven Development. Implementing a testing and evaluation framework to assess the model's performance would allow us to track the precision of the anomaly detection. This could include mainly cross-validation with a control datasets where anomalies are known,to better understand the trade-offs between false positives and false negatives.
 
-44. **Integration with Other Tools**: This part involves crafting a light microservices system where we enrich the data with the anomaly calculation before being shipped to a monitoring solution such as Kibana + Elastic which is what I personally use. This would integrate the Isolation Forest model with other security tools and frameworks such as a SIEM or IDS to raise alert or take action. This would also accomplish **Real-time Monitoring**.
+4. **Integration with Other Tools**: This part involves crafting a light microservices system where we enrich the data with the anomaly calculation before being shipped to a monitoring solution such as Kibana + Elastic which is what I personally use. This would integrate the Isolation Forest model with other security tools and frameworks such as a SIEM or IDS to raise alert or take action. This would also accomplish **Real-time Monitoring**.
 
 ## References
 
