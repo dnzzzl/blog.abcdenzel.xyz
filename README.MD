@@ -30,8 +30,8 @@ Currently
 🔨 Building the marketplace MVP
 📚 Studying for CySA+
 🧠 Reading: Practical Cybersecurity Architecture
-🎯 Looking for remote opportunities — here's my CV
+🎯 Looking for remote opportunities. CV: https://abcdenzel.xyz/denzelmendez-systems_engineer_resume.pdf
 
 Let's Talk
-If you're working on something interesting — especially backend architecture, security, or infrastructure — I'd like to hear about it.
+If you're working on something interesting. Sspecially backend architecture, security, or software, I'd like to hear about it.
 📧 comeondenzel@proton.me
