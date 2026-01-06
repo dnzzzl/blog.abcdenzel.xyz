@@ -1,102 +1,37 @@
-# Denzel's Blog
+I'm Denzel Mendez
+I build software, break things on purpose to understand them, and sometimes write about it at abcdenzel.xyz.
+Based in the Dominican Republic.
 
-Hugo-based blog deployed to GitHub Pages at https://blog.abcdenzel.xyz
+Building in public:
+🛒 Dominoes — P2P marketplace for DR. ASP.NET Core API + React Native (Expo).
+✍️ Blog — Technical writing about systems, software and security.
 
-## Quick Start
+Stack
+Backend:    C# / .NET Core / Node.js
+Frontend:   React / Expo / "enough CSS to be dangerous"
+Databases:  PostgreSQL / Oracle / SQL Server / MogoDb
+Infra:      Docker / GitHub Actions / Linux
+Security:   Network analysis, IDS, CySA+ (in progress)
 
-### Local Development
+My Coding Rules
+Comments: 
+   Should be short and sweet, convey as much non obvious information like your decision making, treat it like you're sending a message on the groupchat.
+Naming:
+   Names should be clear and obvious. Code should read like prose. If you need a comment to explain what processData() does, rename it to what it actually does. 
+   Comments are optional when UserAuthenticationService.ValidateCredentials() does what it says.
+Frontend:
+   Easy, reusable components. UI should get out of the way. I want to feel like I'm putting legos together so I can focus on the stuff that actually matters: auth flows, state management, that one CORS error that's been haunting me for three days, and real-time websockets.
+Commits:
+   Atomic. One thing per commit. and then try to learn how git bisect actually works.
+Dependencies: Own them.
 
-```bash
-# Start Hugo development server
-hugo serve
+Currently
 
-# Start with drafts visible
-hugo serve -D
+🔨 Building the marketplace MVP
+📚 Studying for CySA+
+🧠 Reading: Practical Cybersecurity Architecture
+🎯 Looking for remote opportunities — here's my CV
 
-# Build for production
-hugo
-```
-
-### Deployment
-
-The site automatically deploys to GitHub Pages on push to the `master` branch.
-
-**First-time setup:**
-
-1. In GitHub repository settings:
-   - Go to **Settings > Pages**
-   - Under "Build and deployment", set **Source** to **GitHub Actions**
-2. Configure custom domain:
-   - In **Settings > Pages > Custom domain**, enter `blog.abcdenzel.xyz`
-3. In your DNS provider (e.g., Cloudflare), add DNS records:
-   ```
-   Type: CNAME
-   Name: blog
-   Target: yourusername.github.io
-   ```
-4. Wait for DNS propagation (can take up to 24 hours, usually ~10 minutes)
-5. In **Settings > Pages**, check "Enforce HTTPS" once DNS is working
-
-## Repository Structure
-
-```
-.
-├── .github/
-│   └── workflows/
-│       └── deploy.yml          # GitHub Actions deployment
-├── archetypes/                 # Content templates
-├── content/
-    |
-    en/es
-│   └── posts/
-│       ├── meta/               # Meta posts (blogging, philosophy, etc.)
-│   │   └── tech/               # Technical posts
-│   ├── about.md                # About page
-│   └── author.md               # Author bio
-├── themes/
-│   └── nightfall/              # Alternative theme (git submodule)
-├── hugo.toml                   # Hugo configuration
-└── README.md                   # This file
-```
-
-## Configuration
-
-Main configuration in `hugo.toml`:
-
-- **baseURL**: `https://blog.abcdenzel.xyz/`
-- **Theme**: `diary` (hugo-theme-diary)
-- **Hugo version**: 0.152.2+
-
-## Writing Posts
-
-Create a new post:
-
-```bash
-hugo new content/posts/tech/my-post-title.md
-```
-
-Post frontmatter example:
-
-```toml
-+++
-date = '2025-11-16T10:30:00-04:00'
-draft = false
-title = 'My Post Title'
-tags = ['tag1', 'tag2']
-categories = ['tech']
-+++
-```
-
-## Themes
-
-Two themes available:
-
-1. **diary** (current): Mobile-friendly journal theme with dark mode
-
-
-## Resources
-
-- [Hugo Documentation](https://gohugo.io/documentation/)
-- [GitHub Pages Docs](https://docs.github.com/en/pages)
-- [hugo-theme-diary](https://github.com/AmazingRise/hugo-diary)
-- [Nightfall Theme](https://github.com/LordMathis/hugo-theme-nightfall)
+Let's Talk
+If you're working on something interesting — especially backend architecture, security, or infrastructure — I'd like to hear about it.
+📧 comeondenzel@proton.me
