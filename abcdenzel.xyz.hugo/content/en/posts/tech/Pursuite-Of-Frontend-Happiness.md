@@ -1,11 +1,11 @@
 +++
 date = '2026-01-06T18:57:41-04:00'
-draft = true 
+draft = false
 title = 'Pursuite of Frontend Happiness'
 +++
 
-I had abandoned all hope for frontend and maximized no minimalism by ditching all frameworks and returning to proverbial html, css and js.
-This left me blindsided by the strides being made by the messy webdev and designers community while I went on learning how to writing better code in the first place. I could also say that this gave time for technologies to rise and mature.
+I had abandoned all hope for frontend and maximized on minimalism by ditching all frameworks and returning to proverbial html, css and js.
+This left me blindsided by the strides being made by the messy webdev and designers community while I went on learning how to write better code in the first place. I could also say that this gave time for technologies to rise and mature.
 This week I came across React Native Expo and I decided that this was the Framework I was going to stick with and master in order to build cross-platform applications with ease.
 
 ## React Expo
@@ -22,6 +22,8 @@ Easy enough I was up and running... not without first backing out, deleting the 
 ```bash
 npx rn-new@latest --nativewind
 ```
+
+As I wanted to skip building my own css classes and token specifications, I decided to use NativeWind for styling.
 
 ```
 …/frontend/dominoes-dr-market master  ? ❯ npm run web
@@ -73,7 +75,9 @@ Web Bundled 4360ms node_modules/expo-router/entry.js (1112 modules)
  LOG  [web] Logs will appear in the browser console
 ```
 
-That output shows the link to the development workflow that they have with the app. So they distribute this app called Expo Go on the client that serves as a sandbox for your development code to run on, as well as an interface to native APIs on the phone the app is installed on. This way you can test things like haptic feedback without having to compile, package and install a native app. Kind of brilliant, certainly innovative. I was immediately wondering "Did apple just let them do this?" but upon closer inspection you find that only a select reviewed libraries are allowed on  the platform by the Expo team, that's the quickest reasoning I can see, that or maybe apple has not caught up yet.
+That output shows the link to the development workflow that they have with the app.
+
+So they distribute this app called Expo Go on the client that serves as a sandbox for your development code to run on, as well as an interface to native APIs on the phone the app is installed on. This way you can test things like haptic feedback without having to compile, package and install a native app. Kind of brilliant, certainly innovative. I was immediately wondering "Did apple just let them do this?" but upon closer inspection you find that only a select reviewed libraries are allowed on  the platform by the Expo team, that's the quickest reasoning I can see, that or maybe apple has not caught up yet.
 The point is, you can download that app for testing your mobile interface end to end.
 Apparently its called Metro, searching more about it:
  <https://docs.expo.dev/guides/customizing-metro/>
@@ -143,6 +147,27 @@ Tier 3 (Build Last):
 - Tabs
 - Accordion
 - Complex data visualizations
+
+Here is how I would define a css token spec if I had to:
+
+```
+export const tokens = {
+  colors: {
+    primary: { 50: '#...', 600: '#...', 900: '#...' },
+    gray: { 50: '#...', 900: '#...' },
+    error: '#...',
+    success: '#...',
+  },
+  spacing: { xs: 4, sm: 8, md: 16, lg: 24, xl: 32 },
+  radius: { sm: 4, md: 8, lg: 12 },
+  typography: {
+    h1: { size: 32, weight: 700, lineHeight: 1.2 },
+    body: { size: 16, weight: 400, lineHeight: 1.5 },
+  }
+};
+```
+
+And I would probably have copilot generate the rest of that.
 
 ---
 
