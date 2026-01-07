@@ -26,7 +26,7 @@ npx rn-new@latest --nativewind
 As I wanted to skip building my own css classes and token specifications, I decided to use NativeWind for styling.
 
 ```
-…/frontend/dominoes-dr-market master  ? ❯ npm run web
+…/frontend/dominoes-dr-market master  ? ❯ npm run web
 
 > dominoes-dr-market@1.0.0 web
 > expo start --web
@@ -35,44 +35,12 @@ Starting project at /home/ysl/repos/dr-market/frontend/dominoes-dr-market
 Starting Metro Bundler
 ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 █ ▄▄▄▄▄ █▄▄▄ ▀█▄█▄█ ▄▄▄▄▄ █
-█ █   █ ██▄▀ █ ▀▄▄█ █   █ █
-█ █▄▄▄█ ██▀▄ ▄███▀█ █▄▄▄█ █
-█▄▄▄▄▄▄▄█ ▀▄█ ▀▄█▄█▄▄▄▄▄▄▄█
-█  █▄ ▀▄▀█▄▀█▄▀█ ▀█▄█▀█▀▀▄█
-█▀▀▄▀▀▄▄  ▄██▄█▄▄ ▀███▄▀▀ █
-█▀██▀▀█▄▄▄▄ █ ▀▄ █ ▄▀▀█▀ ██
-█ ▄▀▄▄▄▄▄█▄ █▀██ ▄▀ ██▄▀  █
-█▄█▄███▄█▀ █▄▀  █ ▄▄▄  ▄▀▄█
-█ ▄▄▄▄▄ ███▀▄ ▀ █ █▄█ ███▄█
-█ █   █ █ ▄█ ▀▀█▄ ▄  ▄ █▀▀█
-█ █▄▄▄█ █▀▀█  █▄ ▄█▀▀▄█   █
-█▄▄▄▄▄▄▄█▄▄█▄██▄▄▄▄█▄▄███▄█
+...
 
 › Metro waiting on exp://192.168.100.183:8081
 › Scan the QR code above with Expo Go (Android) or the Camera app (iOS)
 
 › Web is waiting on http://localhost:8081
-
-› Using Expo Go
-› Press s │ switch to development build
-
-› Press a │ open Android
-› Press w │ open web
-
-› Press j │ open debugger
-› Press r │ reload app
-› Press m │ toggle menu
-› shift+m │ more tools
-› Press o │ open project code in your editor
-
-› Press ? │ show all commands
-
-Logs for your project will appear below. Press Ctrl+C to exit.
-λ Bundled 8885ms node_modules/expo-router/node/render.js (1049 modules)
-Web node_modules/expo-router/entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 96.5% (1020/1051)
-Web Bundled 10295ms node_modules/expo-router/entry.js (1111 modules)
-Web Bundled 4360ms node_modules/expo-router/entry.js (1112 modules)
- LOG  [web] Logs will appear in the browser console
 ```
 
 That output shows the link to the development workflow that they have with the app.
