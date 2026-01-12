@@ -1,6 +1,6 @@
 +++
 date = '2026-01-06T18:57:41-04:00'
-draft = false
+draft = false 
 title = 'Pursuite of Frontend Happiness'
 +++
 
@@ -55,7 +55,23 @@ While searching I found this quote:
 
 > What is Expo Go? What is a development build? My project opened in Expo Go, when do I need to switch to a development build?
 
-Same questions I was asking myself. Have a read if you want to dive deeper into some of these details: <https://expo.dev/blog/expo-go-vs-development-builds>
+Same questions I was asking myself. Have a read if you want to dive deeper into some of these details:
+
+- <https://expo.dev/blog/expo-go-vs-development-builds>
+- <https://docs.expo.dev/develop/development-builds/introduction/>
+
+>Expo Go: an optional tool for learning, experimenting, and prototyping
+>There's no faster way to spin up a React Native project and run it on your device or emulator than Expo Go, especially when combined with Snack.
+>However, Expo Go and Snack are not intended for building production apps. They are great when you're getting started on a project or for prototypes. If you plan on deploying your app to the store, then development builds will provide a more flexible, reliable, and complete development environment. This guide does not go into any detail about Expo Go, and this is the only section that mentions it.
+
+| Feature                | Development Build                       | Expo Go                               |
+|------------------------|----------------------------------------|--------------------------------------|
+| Purpose                | Full native app development            | Quick testing and prototyping        |
+| Installation            | Requires native build tools            | Install Expo Go app on device       |
+| Access to Native APIs   | Full access to all native APIs        | Limited to Expo SDK APIs             |
+| Build Process           | Full build process required            | No build process, instant feedback   |
+| Customization           | Fully customizable                     | Limited customization options        |
+| Performance             | Optimized for production               | May not be as performant             |
 
 ## Development plan
 
@@ -66,7 +82,6 @@ Before the code:
 - Take inventory of your screens and paths
 - Map conditional paths (authenticated vs. unauthenticated)
 - Establish the data dependency of each page, Dto pattern, typescript interfaces, etc.
--
 
 ```plaintext
 Public Routes:
@@ -140,3 +155,252 @@ And I would probably have copilot generate the rest of that.
 ---
 
 After that, we are mostly ready to implement the UI. Skip wireframing and all that, or use a tool like figma, your call. Total MVP timeline can be 20-30 hours of focused work.
+
+## Okay, let's skip the UI coding
+
+You don't want to see more of that. And claude will take care of the grunt work for you anyways, So let me give you my rundown of how I understood the system.
+
+### First impressions: Layers and layers
+
+Transpilers and abstractions, everywhere.
+
+If you're using TypeScript (which you should be), you're hitting two transpilers on the JavaScript side alone:
+
+1. TypeScript transpiler (TS → JS)
+2. Babel (modern JS → compatible JS)
+
+__[babel is a transpiler, but it does more than jsx...]()__
+And thats *before* you even try to build and compile into native code.
+
+React Native adds another layer: the Metro bundler takes your bundled JavaScript and packages it for iOS and Android, handling platform-specific transformations, code splitting, and all the other magic that lets you write once and run everywhere.
+
+### Configuration jungle
+
+At first glance, the project root looks like a minefield of config files. Here's what each one actually does:
+
+__app.json__ - Expo's main configuration file. This is where you define your app name, version, icons, splash screens, and platform-specific settings. Think of it as the manifest for your entire app.
+
+```json
+{
+  "expo": {
+    "name": "your-app",
+    "slug": "your-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png"
+    },
+    "platforms": ["ios", "android", "web"]
+  }
+}
+```
+
+__package.json__ - Standard npm configuration. Dependencies, scripts, metadata. Nothing special here if you've worked with Node before.
+
+__.env__ - Environment variables for different deployment targets. API keys, endpoint URLs, feature flags. Keep this out of git.
+
+__.babelrc__ (or babel.config.js) - Babel configuration for JavaScript transpilation. Expo comes with a preset, but you can extend it with plugins. NativeWind, for example, adds its own Babel plugin here.
+
+```json
+{
+  "presets": ["babel-preset-expo"],
+  "plugins": ["nativewind/babel"]
+}
+```
+
+### The router situation
+
+Now we get to the interesting part: routing.
+
+You've got __Expo Router__ sitting on top, which itself uses __React Router__ underneath. I mean, we are layers and layers removed from any actual system integration, but here, that is a positive. As a React Native Expo developer you want to make your screens and ship your product quick, not worry about the C code at the core of it.
+
+We can talk more about my approach to frontend development later. Some might find it to be not-so-controversial-anymore to use AI agents to plan, code, and test your UI views.
+But can they design an aesthetic UI? Im not conviced so far. Though that part might be skill issue on my part.
+Still, the code output is miles quicker than what a human would manage, at least for my experience as a human.
+
+Staying on the topic of amount of code, I think it is crucial to work on smaller commits, one feature at a time, benefits include:
+
+- Added scrutiny on your part because you have to review those.
+- Less context for the model to hallucinate on, great.
+- It's just better.
+
+I guess we did end up getting that out of the way now. I use AI to become a 10x developer, but you know what they say: 10x developer, 10x the bugs. So it's our responsibility to not ship more bugs out there.
+
+#### Expo Router
+
+Expo Router uses file-based routing, similar to Next.js. Your folder structure *is* your route structure:
+
+```
+app/
+├── _layout.tsx          # Root layout
+├── index.tsx            # Home screen (/)
+├── about.tsx            # About screen (/about)
+└── (tabs)/
+    ├── _layout.tsx      # Tab layout
+    ├── home.tsx         # /home
+    └── profile.tsx      # /profile
+```
+
+The parentheses `(tabs)` create a route group without adding to the URL path. It's actually clever once you get used to it.
+
+Navigation is declarative:
+
+```tsx
+import { Link } from 'expo-router';
+
+<Link href="/about">About</Link>
+```
+
+Or programmatic:
+
+```tsx
+import { router } from 'expo-router';
+
+router.push('/about');
+```
+
+#### React Router underneath
+
+Expo Router is built on React Router v6, which means all the same concepts apply: routes, navigation, nested routes, URL parameters. But Expo Router abstracts most of it away with the file-based approach.
+
+Under the hood, React Router handles:
+
+- Route matching
+- Navigation state management
+- History management (important for web targets)
+- Deep linking (crucial for mobile)
+
+The abstraction is nice until you need to do something non-standard. Then you're debugging through layers of framework code trying to figure out which part is Expo and which part is React Router.
+
+### React2Shell: When abstractions attack
+
+Speaking of React Router, let's talk about CVE-2025-55182, informally known as __React2Shell__.
+
+#### The problem
+
+React2Shell is a CVSS 10.0 (maximum severity) pre-authentication RCE vulnerability affecting React Server Components. It was discovered by [Lachlan Davidson](https://github.com/lachlan2k/React2Shell-CVE-2025-55182-original-poc) and disclosed to the React team on November 29, 2025.
+
+The core issue is an insecure deserialization vulnerability in React's "Flight" protocol, which handles server component communication.
+
+#### How it was introduced
+
+React Server Components (RSC) introduced a new way to render components on the server and stream them to the client. To make this work, React needed a protocol for serializing and deserializing component state between server and client.
+
+The Flight protocol handles this serialization. But the deserialization logic had a critical flaw: it trusted the incoming data without proper validation.
+
+An attacker could craft a malicious payload that, when deserialized, would execute arbitrary code on the server.
+
+#### How it was found
+
+Davidson found the vulnerability through security research focused on React's Server Components architecture. After responsible disclosure to Meta's Bug Bounty program on November 29, 2025, the vulnerability was publicly disclosed on December 3, 2025.
+
+Within hours of public disclosure, security researchers published proof-of-concept exploits:
+
+- [Moritz Sanft published working PoC code](https://github.com/moritz-sanft/react2shell-poc) on December 4
+- [Davidson released his original PoC](https://github.com/lachlan2k/React2Shell-CVE-2025-55182-original-poc) on December 5
+
+Several comprehensive technical writeups followed:
+
+- [Wiz's deep-dive analysis](https://www.wiz.io/blog/nextjs-cve-2025-55182-react2shell-deep-dive) of the exploit mechanics
+- [OX Security's granular technical breakdown](https://www.ox.security/blog/react2shell-going-granular-a-deep-deep-deep-technical-analysis-of-cve-2025-55182/)
+- [Datadog Security Labs' analysis](https://securitylabs.datadoghq.com/articles/cve-2025-55182-react2shell-remote-code-execution-react-server-components/)
+- [Trend Micro's PoC analysis](https://www.trendmicro.com/en_us/research/25/l/CVE-2025-55182-analysis-poc-itw.html)
+
+#### Reproducing the vulnerability
+
+The exploit works through several stages:
+
+1. __Circular Reference Exploitation__: The attacker creates two multipart form chunks that reference each other:
+   - Chunk 0 contains a malicious JSON payload
+   - Chunk 1 points back to Chunk 0 using `$@0`
+
+2. __Prototype Pollution__: By exploiting the `$1:__proto__:then` reference pattern, the attacker pollutes `Chunk.prototype.then`, setting a fake chunk's status to `'resolved_model'` to trigger `initializeModelChunk` with attacker-controlled data.
+
+3. __Code Execution__: The crafted payload chains internal React gadgets to create a Promise-like object with an attacker-controlled `.then` property. During deserialization, React automatically resolves these Promise-like objects, which results in code execution.
+
+Here's a simplified example of the vulnerable code path:
+
+```javascript
+// Vulnerable deserialization in React Flight
+function parseModelString(response, parentObject, value) {
+  if (value[0] === '$') {
+    // Reference to another chunk
+    const id = parseInt(value.substring(1), 16);
+    const chunk = getChunk(response, id);
+
+    // Unsafe: Automatically resolves Promise-like objects
+    if (chunk.status === 'resolved_model') {
+      return initializeModelChunk(chunk);  // RCE here
+    }
+  }
+  return value;
+}
+```
+
+The researchers were able to achieve RCE in lab environments by:
+
+1. Setting up a vulnerable Next.js 15.x or React 19.x application
+2. Sending a crafted multipart/form-data POST request to any Server Action endpoint
+3. The payload triggers code execution before the Server Action is even validated
+
+Default configurations were vulnerable. A standard Next.js app created with `create-next-app` and built for production could be exploited with zero code changes by the developer.
+
+#### How it was patched
+
+React released patches in versions 19.0.1, 19.1.2, and 19.2.1. The fix involved:
+
+1. Strict validation of deserialized data structures
+2. Removing automatic resolution of Promise-like objects during deserialization
+3. Adding integrity checks for chunk references
+4. Implementing allowlists for safe deserialization patterns
+
+Next.js released corresponding patches in versions 15.1.4 and 16.0.1.
+
+#### Real-world impact
+
+The vulnerability didn't stay theoretical for long.
+
+Within hours of disclosure on December 3, multiple China state-nexus threat groups began active exploitation, including Earth Lamia and Jackpot Panda, according to [AWS threat intelligence](https://aws.amazon.com/blogs/security/china-nexus-cyber-threat-groups-rapidly-exploit-react2shell-vulnerability-cve-2025-55182/).
+
+[Google Threat Intelligence](https://cloud.google.com/blog/topics/threat-intelligence/threat-actors-exploit-react2shell-cve-2025-55182) identified campaigns deploying:
+
+- MINOCAT tunneler
+- SNOWLIGHT downloader
+- HISONIC backdoor
+- COMPOOD backdoor
+- XMRIG cryptocurrency miners
+
+Iran-nexus actors were also observed exploiting the vulnerability. [Trend Micro documented](https://www.trendmicro.com/en_us/research/25/l/CVE-2025-55182-analysis-poc-itw.html) campaigns executing Cobalt Strike beacons, deploying Nezha, Fast Reverse Proxy (FRP), and the Sliver payload.
+
+CISA added it to the Known Exploited Vulnerabilities catalog, meaning federal agencies had to patch immediately.
+
+### React Native implications
+
+So what does this mean for React Native developers?
+
+__Good news first__: React Native doesn't use React Server Components in the same way Next.js does. The Flight protocol that was vulnerable isn't part of standard React Native architecture.
+
+__But__ (there's always a but):
+
+1. __Expo Router uses React Router__ underneath, which shares some of the same deserialization patterns, though not the vulnerable Server Components code path.
+
+2. __If you're using React 19.x__ in your React Native project, you should still update to the patched versions. Even though the specific RCE vector doesn't apply, defense in depth matters.
+
+3. __Framework coupling risk__: This vulnerability shows how deep the dependency chain goes. React Native → Expo Router → React Router → React core. A vulnerability in the core can have blast radius even if your specific use case doesn't trigger it.
+
+4. __Ecosystem effects__: The React ecosystem moves fast. Security patches in React core often trigger cascading updates across the entire ecosystem. Expo, React Navigation, and other libraries all had to evaluate their exposure and release updates.
+
+The practical impact for most React Native developers is minimal for this specific CVE, but it's a good reminder: keep your dependencies updated, understand what's in your dependency tree, and pay attention to security advisories.
+
+## Closing thoughts
+
+React Native Expo is a great framework for shipping cross-platform apps quickly. The abstraction layers are deep, but they're deep for a reason: they let you focus on building products instead of wrestling with platform-specific native code.
+
+But those abstractions come with responsibility. You need to understand, at least roughly, what's happening under the hood. Not so you can optimize every render cycle, but so you can debug when things go wrong and assess security risks when vulnerabilities like React2Shell emerge.
+
+The config files make sense once you understand their purpose. The router situation is actually elegant once you get past the initial learning curve. And the security landscape... well, that's just the reality of building on top of a massive, fast-moving ecosystem.
+
+Keep your dependencies updated. Read the security advisories. Ship your product.
+
+And maybe check twice before `npm install`-ing that random package.
