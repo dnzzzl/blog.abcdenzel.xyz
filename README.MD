@@ -4,12 +4,17 @@ I build software, break things on purpose to understand them, and sometimes writ
 Based in the DR.
 
 Backend:    C# / .NET Core / Node.js
-Frontend:   React / Expo / "enough CSS to be dangerous"
-Databases:  PostgreSQL / Oracle / SQL Server / MogoDb
-Infra:      Docker / GitHub Actions / Linux
+
+Frontend:   React / Expo / CSS, enough to be useful
+
+Databases:  SQL Server / Oracle / MongoDb
+
+Infra:      Docker / GitHub Actions / Linux / RabbitMQ!
+
 Security:   Network analysis, IDS, CySA+ (in progress)
 
 1 cool project: Network Traffic Anomaly Detection Algorithm in python with pandas and numpy.
+2 cool projects: event driven real time api + mobile groupchat with rabbitmq, react native and signalr.
 
 Currently
 
